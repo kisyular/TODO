@@ -1,0 +1,30 @@
+<%- include header.ejs%>
+<div class="box" id="heading">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p class="alert alert-<%= className %>">Today is <%= date %></p>
+
+</div>
+
+<div class="box">
+    <% items.forEach(function(item){ %>
+        <form method="POST" action="/delete">
+            <div class="item">
+                <label class="sr-only" for="checkbox"></label>
+                <input name="checkbox" id="checkbox"  value="<%= item._id %>"
+                       type="checkbox" onchange="this.form.submit();"/>
+                <p><%= item.name %></p>
+            </div>
+            <input type="hidden" name="specificListName" value="<%= title %>"/>
+        </form>
+    <% }) %>
+
+    <form action="/" class="item" method="post">
+        <label class="sr-only" for="todo">TODO
+        </label><input type="text" id="todo" placeholder="New todo"
+                       name="todo" required>
+        <button type="submit" name="list" value="<%= title %>">+</button>
+    </form>
+</div>
+<%- include footer.ejs%>
+
